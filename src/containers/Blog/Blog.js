@@ -9,7 +9,8 @@ import Axios from 'axios';
 class Blog extends Component {
  
     state = {
-        posts:[]
+        posts:[],
+        clickedPostId : null
     }
 
     componentDidMount() {
@@ -25,6 +26,14 @@ class Blog extends Component {
             this.setState({posts : updatetPosts})
         } )
     }
+
+    postClickedHandler = (id) => {
+        console.log('Hallo I am Clicked Handler',id);
+        this.setState({clickedPostId : id})
+
+        
+    }
+
     render () {
         let posts = this.state.posts.map(post => {
             return (
@@ -32,16 +41,23 @@ class Blog extends Component {
                     key = {post.id}
                     title = {post.title}
                     author = {post.author}
+                    clicked = {() => this.postClickedHandler(post.id)}
                      />
             )
+    
         })
+        
+        let toDisplayPostId = this.state.clickedPostId
+        
         return (
             <div>
                 <section className="Posts">
                     {posts}
                 </section>
                 <section>
-                    <FullPost />
+                    <FullPost 
+                             toDisplayPostId= {this.state.clickedPostId}
+                    />
                 </section>
                 <section>
                     <NewPost />
