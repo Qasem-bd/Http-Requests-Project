@@ -33,9 +33,33 @@ class Blog extends Component {
 
         
     }
+    prepareFullPost = () => {
+        let toDisplayPostId = this.state.clickedPostId
+        let fullPost 
+
+        if (toDisplayPostId) {
+            let selectedPost = this.state.posts.find((post) => {
+                return (post.id == toDisplayPostId)
+            })
+            return (
+                <FullPost 
+                             toDisplayPostId= {toDisplayPostId}
+                             toDisplayPostTitle={selectedPost.title}
+                             toDisplayPostBody = {selectedPost.body}
+                    />
+            )
+            
+        } 
+        else {
+            return <FullPost toDisplayPostId= {toDisplayPostId}/>
+        }
+        
+
+    }
 
     render () {
         let posts = this.state.posts.map(post => {
+        
             return (
                 <Post
                     key = {post.id}
@@ -46,8 +70,10 @@ class Blog extends Component {
             )
     
         })
+        console.log(this.prepareFullPost())
         
-        let toDisplayPostId = this.state.clickedPostId
+        
+        
         
         return (
             <div>
@@ -55,9 +81,7 @@ class Blog extends Component {
                     {posts}
                 </section>
                 <section>
-                    <FullPost 
-                             toDisplayPostId= {this.state.clickedPostId}
-                    />
+                  { this.prepareFullPost() }
                 </section>
                 <section>
                     <NewPost />
