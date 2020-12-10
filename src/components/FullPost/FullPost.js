@@ -1,8 +1,25 @@
+import Axios from 'axios';
 import React, { Component } from 'react';
 
 import './FullPost.css';
 
 class FullPost extends Component {
+
+    state = {
+        post: null
+    }
+
+
+    componentDidUpdate () {
+        if ( this.props.toDisplayPostId ) {
+            if(!this.state.post || (this.state.post && (this.state.post.id != this.props.toDisplayPostId)))
+            Axios.get('https://jsonplaceholder.typicode.com/posts/'+ this.props.toDisplayPostId).
+            then((response) => {
+                this.setState({post : response.data})
+            } )
+        }
+        
+    }
     render () {
         let post 
         if (!this.props.toDisplayPostId){
@@ -12,16 +29,25 @@ class FullPost extends Component {
                     </div>;
         }
         else {
-            post = (
-                <div className="FullPost">
-                    <h1>{this.props.toDisplayPostTitle}</h1>
-                    <p>{this.props.toDisplayPostBody}</p>
-                    <div className="Edit">
-                        <button className="Delete">Delete</button>
+            if (!this.state.post) {
+                post = <div className="FullPost" >
+                <p>Loading post...</p>
+            </div>;
+            }else {
+
+                post = (
+                    <div className="FullPost">
+                        <h1>{this.state.post.title}</h1>
+                        <p>{this.state.post.body}</p>
+                        <div className="Edit">
+                            <button className="Delete">Delete</button>
+                        </div>
                     </div>
-                </div>
-    
-            );
+        
+                );
+            }
+
+            
         }
         
         return post;

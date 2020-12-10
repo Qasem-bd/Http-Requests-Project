@@ -42,14 +42,14 @@ class Blog extends Component {
                 return (post.id == toDisplayPostId)
             })
             return (
-                <FullPost 
+                     <FullPost 
                              toDisplayPostId= {toDisplayPostId}
                              toDisplayPostTitle={selectedPost.title}
                              toDisplayPostBody = {selectedPost.body}
-                    />
-            )
-            
+                        /> 
+                    )    
         } 
+       
         else {
             return <FullPost toDisplayPostId= {toDisplayPostId}/>
         }
@@ -70,10 +70,7 @@ class Blog extends Component {
             )
     
         })
-        console.log(this.prepareFullPost())
-        
-        
-        
+    
         
         return (
             <div>
@@ -81,7 +78,8 @@ class Blog extends Component {
                     {posts}
                 </section>
                 <section>
-                  { this.prepareFullPost() }
+                  {/* { this.prepareFullPost() } */}
+                  <FullPost toDisplayPostId= {this.state.clickedPostId}/>
                 </section>
                 <section>
                     <NewPost />
