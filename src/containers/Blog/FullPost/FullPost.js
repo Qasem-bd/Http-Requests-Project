@@ -9,27 +9,26 @@ class FullPost extends Component {
         post: null
     }
 
-
-    componentDidUpdate () {
-        if ( this.props.toDisplayPostId ) {
-            if(!this.state.post || (this.state.post && (this.state.post.id != this.props.toDisplayPostId)))
-            Axios.get('https://jsonplaceholder.typicode.com/posts/'+ this.props.toDisplayPostId).
-            then((response) => {
+    componentDidMount () {
+    
+        if ( this.props.match.params.postId ) {
+            Axios.get('https://jsonplaceholder.typicode.com/posts/'+ this.props.match.params.postId)
+            .then((response) => {
                 this.setState({post : response.data})
             } )
         }
         
     }
     deletePostHandler = () => {
-        Axios.delete('https://jsonplaceholder.typicode.com/posts/'+ this.props.toDisplayPostId).
-        then (response => {
+        Axios.delete('https://jsonplaceholder.typicode.com/posts/'+ this.props.match.params.postId)
+        .then (response => {
             console.log(response)
         })
     }
 
     render () {
         let post 
-        if (!this.props.toDisplayPostId){
+        if (! this.props.match.params.postId){
 
              post = <div className="FullPost" >
                         <p>Please select a Post!</p>

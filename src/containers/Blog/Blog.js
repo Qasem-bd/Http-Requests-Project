@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import {Route,NavLink} from 'react-router-dom'
 
-import FullPost from './FullPost/FullPost';
 import './Blog.css';
 import Posts from './Posts/Posts'
 import NewPost from './NewPost/NewPost'
+import FullPost from './FullPost/FullPost'
 
 class Blog extends Component {
  
     
     prepareFullPost = () => {
         let toDisplayPostId = this.state.clickedPostId
-        let fullPost 
 
         if (toDisplayPostId) {
             let selectedPost = this.state.posts.find((post) => {
-                return (post.id == toDisplayPostId)
+                return (post.id === toDisplayPostId)
             })
             return (
                      <FullPost 
@@ -34,7 +33,6 @@ class Blog extends Component {
     }
 
     render () {
-       console.log ('blog props ', this.props)
         
         return (
             <div>
@@ -59,7 +57,8 @@ class Blog extends Component {
               {/* <Route path = '/' exact render = {() => <h1>Home1</h1>} />
               <Route path = '/'  render = {() => <h1>Home2</h1>} /> */}
               <Route path = '/' exact component = {Posts}/>
-              <Route path = '/new-post'   component = {NewPost}/>
+              <Route path = '/:postId' exact component = {FullPost}/>
+              <Route path = '/new-post' exact  component = {NewPost}/>
                
             </div>
         );
