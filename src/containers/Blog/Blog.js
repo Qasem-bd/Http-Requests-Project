@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route,Link} from 'react-router-dom'
+import {Route,NavLink} from 'react-router-dom'
 
 import FullPost from './FullPost/FullPost';
 import './Blog.css';
@@ -34,30 +34,36 @@ class Blog extends Component {
     }
 
     render () {
-       
+       console.log ('blog props ', this.props)
         
         return (
             <div>
                 <header className = 'Blog'>
                     <nav>
                         <ul>
-                            <li><Link to = '/' >Home</Link></li>
-                            <li><Link to = {{
+                            <li><NavLink exact 
+                                 to = '/'
+                                 activeClassName = 'my-active' >Home</NavLink></li>
+                            <li><NavLink activeStyle = {{
+                                color:'orange',
+                                textDecoration: 'underline'
+                            }} 
+                                to = {{
                                 pathname : '/new-post',
                                 hash : '#submit',
                                 search:'?quick-submit=true'
-                            }}>New Post</Link></li>
+                            }}>New Post</NavLink></li>
                         </ul>
                     </nav>
                 </header>
               {/* <Route path = '/' exact render = {() => <h1>Home1</h1>} />
               <Route path = '/'  render = {() => <h1>Home2</h1>} /> */}
               <Route path = '/' exact component = {Posts}/>
-              <Route path = '/new-post' exact component = {NewPost}/>
+              <Route path = '/new-post'   component = {NewPost}/>
                
             </div>
         );
     }
 }
 
-export default Blog;
+export default Blog ;

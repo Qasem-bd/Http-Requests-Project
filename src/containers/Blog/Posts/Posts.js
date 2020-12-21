@@ -13,6 +13,7 @@ class Posts extends Component {
 
     
     componentDidMount() {
+
         axios.get('https://jsonplaceholder.typicode.com/posts').then((response) =>{
             
             let posts = response.data.slice(0,4);
