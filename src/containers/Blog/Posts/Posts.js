@@ -1,8 +1,9 @@
 import React,{Component} from 'react'
 import Post from '../../../components/Post/Post'
+import FullPost from '../FullPost/FullPost'
 import './Posts.css'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Link,Route} from 'react-router-dom'
 
 
 class Posts extends Component {
@@ -16,7 +17,7 @@ class Posts extends Component {
 
         axios.get('https://jsonplaceholder.typicode.com/posts').then((response) =>{
             
-            let posts = response.data.slice(0,15);
+            let posts = response.data.slice(0,4);
             let updatetPosts = posts.map(post => {
                 return {
                     ...post,
@@ -62,9 +63,13 @@ class Posts extends Component {
 
         }
         return (
-            <section className="Posts">
-                {posts}
-            </section>
+            <div>
+                <section className="Posts">
+                    {posts}
+                </section>
+                <Route path ={this.props.match.url + ':postId' }  exact component = {FullPost}/>  
+            </div>
+
         )
     }
 

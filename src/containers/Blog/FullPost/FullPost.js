@@ -9,17 +9,33 @@ class FullPost extends Component {
         post: null
     }
 
+
     componentDidMount () {
-        console.log(this.props)
-    
-        if ( this.props.match.params.postId ) {
-            Axios.get('https://jsonplaceholder.typicode.com/posts/'+ this.props.match.params.postId)
-            .then((response) => {
-                this.setState({post : response.data})
-            } )
-        }
+        this.loadData()
         
     }
+
+    componentDidUpdate () {
+        this.loadData();
+
+    }
+
+    loadData = () => {
+        if ( this.props.match.params.postId ) {
+            
+           
+            if(!this.state.post || (this.state.post && (this.state.post.id !== +this.props.match.params.postId ))) {
+               
+                Axios.get('https://jsonplaceholder.typicode.com/posts/'+ this.props.match.params.postId)
+                .then((response) => {
+                    this.setState({post : response.data})
+                } )
+
+            }
+                            
+        }
+    }
+
     deletePostHandler = () => {
         Axios.delete('https://jsonplaceholder.typicode.com/posts/'+ this.props.match.params.postId)
         .then (response => {
@@ -41,7 +57,6 @@ class FullPost extends Component {
                 <p>Loading post...</p>
             </div>;
             }else {
-
                 post = (
                     <div className="FullPost">
                         <h1>{this.state.post.title}</h1>

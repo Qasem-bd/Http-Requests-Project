@@ -9,28 +9,6 @@ import FullPost from './FullPost/FullPost'
 class Blog extends Component {
  
     
-    prepareFullPost = () => {
-        let toDisplayPostId = this.state.clickedPostId
-
-        if (toDisplayPostId) {
-            let selectedPost = this.state.posts.find((post) => {
-                return (post.id === toDisplayPostId)
-            })
-            return (
-                     <FullPost 
-                             toDisplayPostId= {toDisplayPostId}
-                             toDisplayPostTitle={selectedPost.title}
-                             toDisplayPostBody = {selectedPost.body}
-                        /> 
-                    )    
-        } 
-       
-        else {
-            return <FullPost toDisplayPostId= {toDisplayPostId}/>
-        }
-        
-
-    }
 
     render () {
         
@@ -58,9 +36,9 @@ class Blog extends Component {
               <Route path = '/'  render = {() => <h1>Home2</h1>} /> */}
              
               <Switch>
-                     <Route path = '/' exact component = {Posts}/>     
                     <Route path = '/new-post' exact  component = {NewPost}/>  
-                    <Route path = '/:postId' exact component = {FullPost}/>  
+                     <Route path = '/'  component = {Posts}/>     
+                   
               </Switch>
 
                
