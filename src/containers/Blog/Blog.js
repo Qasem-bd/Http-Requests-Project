@@ -39,9 +39,9 @@ class Blog extends Component {
                 <header className = 'Blog'>
                     <nav>
                         <ul>
-                            <li><NavLink exact 
+                            <li><NavLink exact
                                  to = '/'
-                                 activeClassName = 'my-active' >Home</NavLink></li>
+                                 activeClassName = 'my-active' >Posts</NavLink></li>
                             <li><NavLink activeStyle = {{
                                 color:'orange',
                                 textDecoration: 'underline'
@@ -56,8 +56,9 @@ class Blog extends Component {
                 </header>
               {/* <Route path = '/' exact render = {() => <h1>Home1</h1>} />
               <Route path = '/'  render = {() => <h1>Home2</h1>} /> */}
-              <Route path = '/' exact component = {Posts}/>
+             
               <Switch>
+                     <Route path = '/' exact component = {Posts}/>     
                     <Route path = '/new-post' exact  component = {NewPost}/>  
                     <Route path = '/:postId' exact component = {FullPost}/>  
               </Switch>

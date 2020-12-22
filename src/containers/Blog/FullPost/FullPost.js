@@ -10,6 +10,7 @@ class FullPost extends Component {
     }
 
     componentDidMount () {
+        console.log(this.props)
     
         if ( this.props.match.params.postId ) {
             Axios.get('https://jsonplaceholder.typicode.com/posts/'+ this.props.match.params.postId)
