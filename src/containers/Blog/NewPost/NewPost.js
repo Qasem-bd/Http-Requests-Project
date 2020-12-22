@@ -24,7 +24,9 @@ class NewPost extends Component {
         Axios.post('https://jsonplaceholder.typicode.com/posts',post)
         .then (response => {
             console.log(response)
-            this.setState({submitted:true})
+            // this.setState({submitted:true}) or
+            // this.props.history.push('/posts') or
+            this.props.history.replace('/posts')
         })
     }
 
